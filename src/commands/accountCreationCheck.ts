@@ -14,27 +14,26 @@ export default (bot: Eris.Client): Command => ({
         let diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
         // if (diffDays < 60) {
         //     const muteUntil = new Date(Date.now() + MUTE_DURATION);
-        //     await member.edit({ communicationDisabledUntil: muteUntil }, 'Account too new');
-        //     let dmChannel = await bot.getDMChannel('1216795874877771806'); // DM aris instead
-        //     dmChannel.createMessage({
-        //         embeds: [{
-        //             color: 0xffffff,
-        //             description: `<@${member.id}> (${member.username}) created their account <t:${Math.round(member.createdAt/1000)}:R> (<t:${Math.round(member.createdAt/1000)}:F>)`
-        //         }],
-        //         components: [{
-        //             type: Eris.Constants.ComponentTypes.ACTION_ROW,
-        //             components: [{
-        //                 label: 'Visit Profile',
-        //                 style: Eris.Constants.ButtonStyles.LINK,
-        //                 type: Eris.Constants.ComponentTypes.BUTTON,
-        //                 url: `https://discord.com/users/${member.id}`
-        //             }]
-        //         }]
-        //     });
         // }
         if (diffDays < (30)) {
             await guild.banMember(member.id, 0, 'Account too new (<1 month.)');
             // await guild.banMember(member.id, 0, 'Account too new (<1 month, contact 1216795874877771806 in case this was a mistake.)');
+            let dmChannel = await bot.getDMChannel('1216795874877771806'); // DM aris instead
+            dmChannel.createMessage({
+                embeds: [{
+                    color: 0xffffff,
+                    description: `<@${member.id}> (${member.username}) created their account <t:${Math.round(member.createdAt/1000)}:R> (<t:${Math.round(member.createdAt/1000)}:F>)`
+                }],
+                components: [{
+                    type: Eris.Constants.ComponentTypes.ACTION_ROW,
+                    components: [{
+                        label: 'Visit Profile',
+                        style: Eris.Constants.ButtonStyles.LINK,
+                        type: Eris.Constants.ComponentTypes.BUTTON,
+                        url: `https://discord.com/users/${member.id}`
+                    }]
+                }]
+            });
         } 
     }
 });
