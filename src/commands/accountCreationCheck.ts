@@ -13,8 +13,8 @@ export default (bot: Eris.Client): Command => ({
         let diff = now.getTime() - created.getTime();
         let diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
         if (diffDays < 60) {
-            const muteUntil = new Date(Date.now() + MUTE_DURATION);
-            await member.edit({ communicationDisabledUntil: muteUntil }, 'Account too new');
+            const muteUntilDuration = new Date(Date.now() + MUTE_DURATION);
+            await member.edit({ communicationDisabledUntil: muteUntilDuration }, 'Account too new');
             let dmChannel = await bot.getDMChannel('1216795874877771806'); // DM aris instead
             dmChannel.createMessage({
                 embeds: [{
